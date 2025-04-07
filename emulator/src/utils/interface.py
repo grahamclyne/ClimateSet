@@ -85,6 +85,7 @@ def get_model(config: DictConfig, **kwargs):
             config.model,
             _recursive_=False,
             datamodule_config=config.datamodule,
+            model_config=config.model,
             **kwargs,
         )
 

@@ -12,7 +12,7 @@ train_years: "2015-2100"
 val_split: 0.1
 train_scenarios: ["ssp126", "ssp370", "ssp585"]
 test_scenarios: ["ssp245"]
-train_models:  ["NorESM2-LM"]
+train_models:  ["NorESM2-MM"]
 num_ensembles: 1
 num_workers:  0
 pin_memory: False

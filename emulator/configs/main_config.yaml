@@ -4,7 +4,7 @@
 defaults:
   - _self_
   - trainer: debug.yaml
-  - model: unet.yaml
+  - model: archesclimate.yaml
   - datamodule: climate.yaml
   - decoder: null
   - callbacks: default.yaml  # or use wandb.yaml for wandb suppport
