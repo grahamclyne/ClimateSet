@@ -3,7 +3,7 @@
 # specify here default training configuration
 defaults:
   - _self_
-  - trainer: debug.yaml
+  - trainer: default.yaml
   - model: archesclimate.yaml
   - datamodule: climate.yaml
   - decoder: null
@@ -37,7 +37,7 @@ model:
   super_decoder: False
 
 datamodule:
-  batch_size: 4
+  batch_size: 1
   shuffle: False
   # If you would like to track emissions using codecarbon
   emissions_tracker: True 

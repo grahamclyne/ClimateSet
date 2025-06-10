@@ -2,49 +2,38 @@ defaults:
     - /optimizer: adam.yaml
 
 _target_: emulator.src.core.models.archesclimate.ArchesClimate
-
+logger:
+    wandb:
+        project: "archesclimate_climateset"
+        offline: True
 scheduler:
     _target_: emulator.src.utils.lr_scheduler.LinearWarmupCosineAnnealingLR
     warmup_epochs: 5 #original specs
     max_epochs: 50 #original specs
     warmup_start_lr: 1e-8
     eta_min: 1e-8
-    
-
-forecast: 
-    _target_: DecadeCast.model.forecast.ForecastModuleWithCond
-    name: forecast_climateset
-    cond_dim: 512
-    lr: 3e-4
-    betas: [0.9, 0.98]
-    weight_decay: 0.05
-    num_warmup_steps: 5000
-    num_training_steps: 100000
-    use_prev: True
-    load_prev: 1
-    add_input_state: True
-    old_timestep: False
-backbone:
-# default backbone
-    _target_: geoarches.backbones.archesweather.ArchesWeatherCondBackbone
-    tensor_size: [1,72,72] # after embed
-    emb_dim: 768
-    cond_dim: 512
-    window_size: [1, 6, 10]
-    droppath_coeff: 0.2
-    dropout: 0
-    depth_multiplier: 2
-    use_skip: False
-    first_interaction_layer: False
-    axis_attn: False
-    mlp_layer: swiglu
-    mlp_ratio: 4.0
-embedder: 
-    _target_: DecadeCast.model.dcpp_encoder_decoder.DCPPEncodeDecodeLayer
-    surface_ch: 90 # ( 17 + (7*4))*3 
-    level_ch: 7
-    img_size: [90,144,144]
-    emb_dim: 768
-    out_emb_dim: 768 # 2x because of skip
-    patch_size: [2, 2, 2]
-    n_concatenated_states: 2 # prev and pred
+module: 
+    pretrained_path: ${work_dir}/emulator/checkpoints/epoch=99-step=5900.ckpt
+    backbone:
+    # default backbone
+        _target_: geoarches.backbones.archesweather.ArchesWeatherCondBackbone
+        tensor_size: [1,48,72] # after embed
+        emb_dim: 384
+        cond_dim: 512
+        window_size: [1, 6, 10]
+        droppath_coeff: 0.2
+        dropout: 0
+        depth_multiplier: 2
+        use_skip: False
+        first_interaction_layer: False
+        axis_attn: False
+        mlp_layer: swiglu
+        mlp_ratio: 4.0
+    embedder: 
+        _target_: DecadeCast.model.climateset_encoder_decoder.ClimateSetEncodeDecodeLayer
+        surface_ch: 48 
+        img_size: [48,96,144]
+        emb_dim: 384
+        out_emb_dim: 384
+        patch_size: [2, 2, 2]
+        n_concatenated_states: 1

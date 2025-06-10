@@ -33,6 +33,7 @@ class BaseModel(LightningModule):
     def __init__(
         self,
         datamodule_config: DictConfig = None,
+        model_config: DictConfig = None,
         optimizer: Optional[DictConfig] = None,
         scheduler: Optional[DictConfig] = None,
         name: str = "",

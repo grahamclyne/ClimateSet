@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+# [project]
+# name = "DecadeCast"
+# version = "20240208"
+
+# [project.optional-dependencies]
+# dev = ["ruff"]
+
+# [tool.ruff]
+# line-length = 99
+# target-version = 'py311'
+
+# [tool.ruff.lint]
+# # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# # isort - I
+# # pep8-naming - N
+# # Warning - W
+# select = ["E4", "E7", "E9", "F", "I", "N", "W"]
+# ignore = ["E731", "N804", "N813"]
+
+# [tool.ruff.lint.per-file-ignores]
+# # Ignore `F401` (unused import) in all direct files under `src/geoarches/`.
+# #"src/DecadeCast/*.py" = ["F401"]
+
+# [tool.setuptools.package-data]
+# # climsim = ["**/*.yaml", "**/*.npy"]
+
+# [project.scripts]
+# # geoarches-main = 'geoarches.main_hydra:main'
+# # geoarches-submit = 'geoarches.submit:main'
+# # geoarches-eval = 'geoarches.evaluation.eval_multistep:main'

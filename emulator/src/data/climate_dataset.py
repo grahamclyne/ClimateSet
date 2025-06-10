@@ -139,7 +139,7 @@ class ClimateDataset(torch.utils.data.Dataset):
             variables=out_variables_im,
             **ds_kwargs,
         )
-
+    
     # this operates variable vise now....
     def load_into_mem(
         self,
@@ -459,13 +459,16 @@ class CMIP6Dataset(ClimateDataset):
 
         if num_ensembles == 1:
             ensembles = os.listdir(self.root_dir)
+            print('ensembles',ensembles)
+            #cheat and hard code the "first" ensemble, otherwise noresm2 LM doesnt have the right data
             self.ensemble_dir = [
-                os.path.join(self.root_dir, ensembles[0])
+                os.path.join(self.root_dir, 'r1i1p1f1')
             ]  # Taking first ensemble member
         else:
             print("Multiple ensembles", num_ensembles)
             self.ensemble_dir = []
             ensembles = os.listdir(self.root_dir)
+            
             for i, folder in enumerate(ensembles):
                 self.ensemble_dir.append(
                     os.path.join(self.root_dir, folder)
